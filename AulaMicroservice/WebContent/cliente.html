@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Cliente HTML</title>
+</head>
+<body>
+	
+	
+	Primeiro Valor: <input type="text" id="num1">
+	<br>
+	Segundo Valor: <input type="text" id="num2">
+	<br>
+	<button onclick="doGet()" >Requisição via GET</button>
+	<br>
+	<button onclick="doPost()" >Requisição via POST</button>
+	<br>
+	<button onclick="doPut()" >Requisição via PUT</button>
+	<br>
+	<button onclick="doDelete()" >Requisição via DELETE</button>
+	
+	<hr>
+	<textarea rows="5" cols="30" id="retorno">
+	</textarea>
+	
+	<script>
+		const campoRetorno = document.getElementById ('retorno');
+		const num1 = document.getElementById ('num1');
+		const num2 = document.getElementById ('num2');
+		
+		function doGet() {
+			
+			const config = {
+					headers: {
+						"Content-type" : "application/x-www-form-urlencoded"
+					},
+					method: 'GET',
+			};
+			
+			fetch('http://localhost:8080/AulaMicroservice/usuario', config)
+			.then(function (resposta) {
+				resposta.text()
+				.then(function (texto) {
+					campoRetorno.value = texto;
+				})
+			})
+			.catch(function (error) {
+				alert(error);
+				})
+		}
+		
+		function doPost() {
+			
+			const config = {
+					headers: {
+						"Content-type" : "application/x-www-form-urlencoded"
+					},
+					method: 'POST',
+					body: `num1=${num1.value}&num2=${num2.value}`
+			};
+			
+			fetch('http://localhost:8080/AulaMicroservice/usuario', config)
+			.then(function (resposta) {
+				resposta.text()
+				.then(function (texto) {
+					campoRetorno.value = texto;
+				})
+			})
+			.catch(function (error) {
+				alert(error);
+			})
+		}			
+		
+		function doPut() {
+			const config = {
+					headers: {
+						"Content-type" : "application/x-www-form-urlencoded"
+					},
+					method: 'PUT',
+					body: `num1=${num1.value}&num2=${num2.value}`
+			};
+			fetch('http://localhost:8080/AulaMicroservice/usuario', config)
+			.then(function (resposta) {
+				resposta.text()
+				.then(function (texto) {
+					campoRetorno.value = texto;
+				})
+			})
+			.catch(function (error) {
+				alert(error);
+				})
+			
+		}
+		
+		function doDelete() {
+			const config = {
+					headers: {
+						"Content-type" : "application/x-www-form-urlencoded"
+					},
+					method: 'DELETE',
+					body: `num1=${num1.value}&num2=${num2.value}`
+			};
+			fetch('http://localhost:8080/AulaMicroservice/usuario', config)
+			.then(function (resposta) {
+				resposta.text()
+				.then(function (texto) {
+					campoRetorno.value = texto;
+				})
+			})
+			.catch(function (error) {
+				alert(error);
+				})
+		}
+		
+	</script>
+
+
+</body>
+</html>
